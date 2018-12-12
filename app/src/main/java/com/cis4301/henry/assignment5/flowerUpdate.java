@@ -56,6 +56,15 @@ public class flowerUpdate extends AppCompatActivity {
                 species=(EditText) findViewById(R.id.editSpecies);
                 genus=(EditText) findViewById(R.id.editGenus);
 
+                genus.setClickable(true);
+                genus.setFocusable(true);
+                genus.setFocusableInTouchMode(true);
+                genus.setCursorVisible(true);
+                species.setClickable(true);
+                species.setFocusable(true);
+                species.setFocusableInTouchMode(true);
+                species.setCursorVisible(true);
+
                 String nameSelected = (String) myListViewFlower.getItemAtPosition(position);
                 String quer= "SELECT GENUS,SPECIES FROM FLOWERS WHERE FLOWERS.COMNAME=="+"'"+nameSelected+"'";
                Cursor cursor2=flowers_db.rawQuery(quer, null);
