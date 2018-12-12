@@ -86,23 +86,25 @@ public class flowerUpdate extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"You have to select a Flower to edit",Toast.LENGTH_LONG);
             return;
         }
-        if(genus.getText() != null) {
+        String genusString = genus.getText().toString();
+        if(genus.getText() != null && !genusString.contains("'") && !genusString.contains("\"")) {
             String updateQuery = "UPDATE FLOWERS " +
                     "SET GENUS = '" + this.genus.getText() + "'" +
                     "WHERE COMNAME = '" + comN.getText() + "'";
             Cursor cursor = flowers_db.rawQuery(updateQuery, null);
             cursor.moveToFirst();
-            System.out.println("Updated genus");
+            System.out.println("Updated genus for: " + comN.getText());
             cursor.close();
 
         }
-        if(species.getText() != null) {
+        String speciesString = species.getText().toString();
+        if(species.getText() != null && !speciesString.contains("'") && !speciesString.contains("\"")) {
             String updateQuery = "UPDATE FLOWERS " +
                     "SET SPECIES = '" + species.getText() + "'" +
                     "WHERE COMNAME = '" + comN.getText() + "'";
             Cursor cursor = flowers_db.rawQuery(updateQuery, null);
             cursor.moveToFirst();
-            System.out.println("Updated species");
+            System.out.println("Updated species for: " + comN.getText());
             cursor.close();
         }
     }
