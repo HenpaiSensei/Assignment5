@@ -92,4 +92,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    void insertSighting(String flower_name, String person_name, String location, String date_sighted){
+        String insertQuery = "INSERT INTO SIGHTINGS (NAME, PERSON, LOCATION, SIGHTED)" +
+                "VALUES ('" + flower_name + "', '" + person_name + "','" + location + "','" + date_sighted + "')";
+        Cursor cursor = flowers_db.rawQuery(insertQuery, null);
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
+
 }
