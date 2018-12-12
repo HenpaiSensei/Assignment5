@@ -52,10 +52,14 @@ public class flowerUpdate extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter,View v, int position, long id) {
 
+                comN=(EditText) findViewById(R.id.editComName);
+                species=(EditText) findViewById(R.id.editSpecies);
+                genus=(EditText) findViewById(R.id.editGenus);
+
                 String nameSelected = (String) myListViewFlower.getItemAtPosition(position);
                 String quer= "SELECT GENUS,SPECIES FROM FLOWERS WHERE FLOWERS.COMNAME=="+"'"+nameSelected+"'";
                Cursor cursor2=flowers_db.rawQuery(quer, null);
-               comN.setText(nameSelected);
+               comN.setText(nameSelected, null);
                if(cursor2!=null && cursor2.moveToFirst()){
                    do{
                        genus.setText(cursor2.getString(0));
@@ -79,6 +83,7 @@ public class flowerUpdate extends AppCompatActivity {
                     "WHERE COMNAME = '" + comN.getText() + "'";
             Cursor cursor = flowers_db.rawQuery(updateQuery, null);
             cursor.moveToFirst();
+            System.out.println("Updated genus");
             cursor.close();
 
         }
@@ -88,6 +93,7 @@ public class flowerUpdate extends AppCompatActivity {
                     "WHERE COMNAME = '" + comN.getText() + "'";
             Cursor cursor = flowers_db.rawQuery(updateQuery, null);
             cursor.moveToFirst();
+            System.out.println("Updated species");
             cursor.close();
         }
     }
