@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".flowerUpdate"></activity>
+        <activity android:name=".flowerUpdate" />
+        <activity android:name=".InsertSightings"></activity>
     </application>
 
 </manifest>

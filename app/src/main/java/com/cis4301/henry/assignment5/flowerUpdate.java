@@ -81,6 +81,7 @@ public class flowerUpdate extends AppCompatActivity {
             Cursor cursor = flowers_db.rawQuery(updateQuery, null);
             cursor.moveToFirst();
             cursor.close();
+
         }
         if(species.getText() != null) {
             String updateQuery = "UPDATE FLOWERS " +
@@ -91,4 +92,8 @@ public class flowerUpdate extends AppCompatActivity {
             cursor.close();
         }
     }
+    public void returnOnClick(View view){
+        finish();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.cis4301.henry.assignment5;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.database.sqlite.*;
@@ -77,24 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void updateFlower(String comname, String genus, String species){
-        if(genus != null) {
-            String updateQuery = "UPDATE FLOWERS " +
-                    "SET GENUS = '" + genus + "'" +
-                    "WHERE COMNAME = '" + comname + "'";
-            Cursor cursor = flowers_db.rawQuery(updateQuery, null);
-            cursor.moveToFirst();
-            cursor.close();
-        }
-        if(species != null) {
-            String updateQuery = "UPDATE FLOWERS " +
-                    "SET SPECIES = '" + species + "'" +
-                    "WHERE COMNAME = '" + comname + "'";
-            Cursor cursor = flowers_db.rawQuery(updateQuery, null);
-            cursor.moveToFirst();
-            cursor.close();
-        }
-    }
+
 
     void insertSighting(String flower_name, String person_name, String location, String date_sighted){
         String insertQuery = "INSERT INTO SIGHTINGS (NAME, PERSON, LOCATION, SIGHTED)" +
@@ -103,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         cursor.moveToFirst();
         cursor.close();
     }
+    public void openUpdateFlower(View view){
+        Intent i= new Intent(getBaseContext(),flowerUpdate.class);
+        startActivity(i);
+    }
+    public void openInsertSighting(View view){
+        Intent i= new Intent(getBaseContext(),InsertSightings.class);
+        startActivity(i);
+    }
+
 
 
 }

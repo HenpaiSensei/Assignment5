@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="182dp"
+        android:layout_height="59dp"
+        android:onClick="openInsertSighting"
+        android:text="Insert Sigthngs"
+        tools:layout_editor_absoluteX="203dp"
+        tools:layout_editor_absoluteY="451dp" />
+
     <ListView
         android:id="@+id/list_view"
-        android:layout_width="215dp"
+        android:layout_width="187dp"
         android:layout_height="354dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -44,7 +53,7 @@
 
     <ListView
         android:id="@+id/listviewSigthings"
-        android:layout_width="145dp"
+        android:layout_width="164dp"
         android:layout_height="352dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -79,11 +88,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/updbutt"
         android:layout_width="198dp"
         android:layout_height="59dp"
+        android:onClick="openUpdateFlower"
         android:text="Update"
-        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="451dp" />
 
 </android.support.constraint.ConstraintLayout>
