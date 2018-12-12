@@ -71,7 +71,7 @@ public class flowerUpdate extends AppCompatActivity {
     }
     public void updateFlower(View view){
         if(comN.getText()==null){
-            Toast.makeText(getApplicationContext(),"You have to select a Flower to edit",Toast.LENGTH_LONG
+            Toast.makeText(getApplicationContext(),"You have to select a Flower to edit",Toast.LENGTH_LONG);
             return;
         }
         if(genus.getText() != null) {
