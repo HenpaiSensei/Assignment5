@@ -15,7 +15,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView myListView;
+    ListView myListViewFlower;
+    ListView myListViewSighting;
+
     ArrayList<String> commonNameList = new ArrayList<String>();
     SQLiteDatabase flowers_db;
 
@@ -25,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         flowers_db = SQLiteDatabase.openDatabase("data/data/com.cis4301.henry.assignment5/databases/flowers.db",  null, 0 );
-        myListView = (ListView) findViewById(R.id.list_view);
-
+        myListViewFlower = (ListView) findViewById(R.id.list_view);
+        myListViewSighting=(ListView) findViewById(R.id.listviewSigthings); 
         String getComNames = "SELECT COMNAME FROM FLOWERS";
 
         Cursor cursor = flowers_db.rawQuery(getComNames, null);
@@ -37,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
          } while(cursor.moveToNext());
 
          ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commonNameList);
-        myListView.setAdapter(adapter);
+        myListViewFlower.setAdapter(adapter);
         
-        myListView.setOnItemClickListener(new OnItemClickListener(){
+        myListViewFlower.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter,View v, int position, long id){
 
-                String nameSelected = (String) myListView.getItemAtPosition(position);
+                String nameSelected = (String) myListViewFlower.getItemAtPosition(position);
                 ArrayList<String> correspondingSightings = getSightings(nameSelected);
-
+                
             }
         });
 
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 sightingsList.add(cursor.getString(2) + ": " + cursor.getString(0) + " saw this flower at " + cursor.getString(1));
                 System.out.println(sightingsList.get(i++));
             } while(cursor.moveToNext());
+        ArrayAdapter<String> adapt= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,sightingsList);
+        myListViewSighting.setAdapter(adapt);
 
         return sightingsList;
 
