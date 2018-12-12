@@ -33,7 +33,6 @@ public class flowerUpdate extends AppCompatActivity {
         comN=(EditText) findViewById(R.id.editComName);
         species=(EditText) findViewById(R.id.editSpecies);
         genus=(EditText) findViewById(R.id.editGenus);
-        comN.setEnabled(false);
         setContentView(R.layout.activity_flower_update);
         flowers_db = SQLiteDatabase.openDatabase("data/data/com.cis4301.henry.assignment5/databases/flowers.db",  null, 0 );
         myListViewFlower = (ListView) findViewById(R.id.list_view);
