@@ -6,6 +6,10 @@ import android.database.sqlite.*;
 import android.database.Cursor;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import java.lang.String;
 
 import java.util.ArrayList;
 
@@ -13,13 +17,14 @@ public class MainActivity extends AppCompatActivity {
 
     ListView myListView;
     ArrayList<String> commonNameList = new ArrayList<String>();
+    SQLiteDatabase flowers_db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SQLiteDatabase flowers_db = SQLiteDatabase.openDatabase("data/data/com.cis4301.henry.assignment5/databases/flowers.db",  null, 0 );
+        flowers_db = SQLiteDatabase.openDatabase("data/data/com.cis4301.henry.assignment5/databases/flowers.db",  null, 0 );
         myListView = (ListView) findViewById(R.id.list_view);
 
         String getComNames = "SELECT COMNAME FROM FLOWERS";
@@ -35,6 +40,37 @@ public class MainActivity extends AppCompatActivity {
         myListView.setAdapter(adapter);
 
 
+        myListView.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapter,View v, int position, long id){
+
+                String nameSelected = (String) myListView.getItemAtPosition(position);
+                ArrayList<String> correspondingSightings = getSightings(nameSelected);
+
+            }
+        });
+
+
+    }
+
+    ArrayList<String> getSightings(String nameSelected){
+        ArrayList<String> sightingsList = new ArrayList<String>();
+        System.out.println(nameSelected);
+        String getSightingsQuery = "SELECT PERSON, LOCATION, SIGHTED" +
+                " FROM SIGHTINGS, FLOWERS" +
+                " WHERE " + "FLOWERS.COMNAME = SIGHTINGS.NAME" + " AND " +  "FLOWERS.COMNAME" + "=" + "'" + nameSelected + "'" +
+                " ORDER BY SIGHTED DESC" +
+                " LIMIT 10";
+
+        Cursor cursor = flowers_db.rawQuery(getSightingsQuery, null);
+        int i = 0;
+        if(cursor != null && cursor.moveToFirst())
+            do{
+                sightingsList.add(cursor.getString(2) + ": " + cursor.getString(0) + " saw this flower at " + cursor.getString(1));
+                System.out.println(sightingsList.get(i++));
+            } while(cursor.moveToNext());
+
+        return sightingsList;
 
     }
 }
