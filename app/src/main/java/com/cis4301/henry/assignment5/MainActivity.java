@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
          ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commonNameList);
         myListView.setAdapter(adapter);
-
-
+        
         myListView.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter,View v, int position, long id){
@@ -73,4 +72,24 @@ public class MainActivity extends AppCompatActivity {
         return sightingsList;
 
     }
+
+    void updateFlower(String comname, String genus, String species){
+        if(genus != null) {
+            String updateQuery = "UPDATE FLOWERS " +
+                    "SET GENUS = '" + genus + "'" +
+                    "WHERE COMNAME = '" + comname + "'";
+            Cursor cursor = flowers_db.rawQuery(updateQuery, null);
+            cursor.moveToFirst();
+            cursor.close();
+        }
+        if(species != null) {
+            String updateQuery = "UPDATE FLOWERS " +
+                    "SET SPECIES = '" + species + "'" +
+                    "WHERE COMNAME = '" + comname + "'";
+            Cursor cursor = flowers_db.rawQuery(updateQuery, null);
+            cursor.moveToFirst();
+            cursor.close();
+        }
+    }
+
 }
