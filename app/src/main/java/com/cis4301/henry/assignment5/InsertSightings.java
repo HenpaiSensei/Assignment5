@@ -40,7 +40,7 @@ public class InsertSightings extends AppCompatActivity {
     }
 
     public boolean flowerExists(Editable comname) {
-        String getComNames = "SELECT COMNAME FROM FLOWERS WHERE FLOWER.COMNAME="+"'"+comname+"'";
+        String getComNames = "SELECT COMNAME FROM FLOWERS WHERE FLOWERS.COMNAME="+"'"+comname+"'";
 
         final Cursor cursor = flowers_db.rawQuery(getComNames, null);
 
