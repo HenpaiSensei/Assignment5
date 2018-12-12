@@ -67,7 +67,7 @@ public class InsertSightings extends AppCompatActivity {
             return;
         }
     }
-    public void returnOnClick(View view){
+    public void returnNow(View view){
         finish();
     }
 
