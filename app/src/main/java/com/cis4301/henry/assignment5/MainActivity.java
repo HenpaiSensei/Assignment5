@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         myListViewFlower = (ListView) findViewById(R.id.list_view);
         myListViewSighting=(ListView) findViewById(R.id.listviewSigthings);
 
-        createIndexes();
+        //createIndexes(); Only run one time
+
         String getComNames = "SELECT COMNAME FROM FLOWERS";
 
         Cursor cursor = flowers_db.rawQuery(getComNames, null);
@@ -106,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         String sightedIndex = "CREATE INDEX sighted_index ON SIGHTINGS (SIGHTED)";
 
         Cursor nameCursor = flowers_db.rawQuery(nameIndex, null);
-        nameCursor.moveToFirst();
-        nameCursor.close();
+            nameCursor.moveToFirst();
+            nameCursor.close();
 
         Cursor personCursor = flowers_db.rawQuery(personIndex, null);
         personCursor.moveToFirst();

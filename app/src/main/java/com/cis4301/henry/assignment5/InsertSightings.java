@@ -52,12 +52,23 @@ public class InsertSightings extends AppCompatActivity {
     }
     public void insertSighting(View view){
 
-        if(name.getText()!=null && flowerExists(name.getText())==true) {
+        String nameString = name.getText().toString();
+        String personString = person.getText().toString();
+        String locationString = location.getText().toString();
+        String dateString = date.getText().toString();
+
+        if(name.getText()!=null && flowerExists(name.getText())==true
+                && !nameString.contains("'") && !nameString.contains("\"")
+                && !personString.contains("'") && !personString.contains("\"")
+                && !locationString.contains("'") && !locationString.contains("\"")
+                && !dateString.contains("'") && !dateString.contains("\"")) {
+
             if (location.getText()!=null&& person.getText()!=null&&date.getText()!=null) {
                 String insertQuery = "INSERT INTO SIGHTINGS (NAME, PERSON, LOCATION, SIGHTED)" +
                         "VALUES ('" + name.getText() + "', '" + person.getText() + "','" + location.getText() + "','" + date.getText() + "')";
                 Cursor cursor = flowers_db.rawQuery(insertQuery, null);
                 cursor.moveToFirst();
+                System.out.println("Insert completed.");
                 cursor.close();
             }
         }
