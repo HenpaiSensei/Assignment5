@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         flowers_db = SQLiteDatabase.openDatabase("data/data/com.cis4301.henry.assignment5/databases/flowers.db",  null, 0 );
         myListViewFlower = (ListView) findViewById(R.id.list_view);
-        myListViewSighting=(ListView) findViewById(R.id.listviewSigthings); 
+        myListViewSighting=(ListView) findViewById(R.id.listviewSigthings);
+
+        createIndexes();
         String getComNames = "SELECT COMNAME FROM FLOWERS";
 
         Cursor cursor = flowers_db.rawQuery(getComNames, null);
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         cursor.moveToFirst();
         cursor.close();
     }
+
     public void openUpdateFlower(View view){
         Intent i= new Intent(getBaseContext(),flowerUpdate.class);
         startActivity(i);
@@ -96,6 +99,30 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    void createIndexes(){
+        String nameIndex = "CREATE INDEX name_index ON SIGHTINGS (NAME)";
+        String personIndex = "CREATE INDEX person_index  ON SIGHTINGS (PERSON)";
+        String locationIndex = "CREATE INDEX location_index ON SIGHTINGS (LOCATION)";
+        String sightedIndex = "CREATE INDEX sighted_index ON SIGHTINGS (SIGHTED)";
+
+        Cursor nameCursor = flowers_db.rawQuery(nameIndex, null);
+        nameCursor.moveToFirst();
+        nameCursor.close();
+
+        Cursor personCursor = flowers_db.rawQuery(personIndex, null);
+        personCursor.moveToFirst();
+        personCursor.close();
+
+        Cursor locationCursor = flowers_db.rawQuery(locationIndex, null);
+        locationCursor.moveToFirst();
+        locationCursor.close();
+
+        Cursor sightedCursor = flowers_db.rawQuery(sightedIndex, null);
+        sightedCursor.moveToFirst();
+        sightedCursor.close();
+
+
+    }
 
 
 }
